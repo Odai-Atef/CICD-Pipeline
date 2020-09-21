@@ -25,14 +25,23 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
+        - run:
+            name: "Save my name to file"
+            command: echo "Hello Odai Atef" > ~/out.txt
         - persist_to_workspace:
             root: ~/
             paths:
              - out.txt        
+
+  print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
         - run:
-            name: "Save my name to file"
-            command: echo "Hello Odai Atef" > ~/out.txt
-        
+            name: "Read File"
+            command: echo cat ~/out.txt
+        - attach_workspace:
+            at: ~/out.txt 
         
 workflows:
   # Name the workflow "welcome"
