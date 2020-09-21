@@ -12,7 +12,7 @@ commands:
         type: string
         default: "Hello World"
     steps:
-       - run echo << parameters.to >>
+       - run: echo << parameters.to >>
 jobs:
   print_using_params:
     docker:
