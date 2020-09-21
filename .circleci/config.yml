@@ -17,7 +17,8 @@ jobs:
     steps:
       - run:
          name: "echo OWNER NAME ENV"
-         command: echo $OWNER
+         command: |
+              echo $OWNER
 workflows:
   # Name the workflow "welcome"
   welcome:
