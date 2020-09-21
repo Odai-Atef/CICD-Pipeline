@@ -5,6 +5,7 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
+presis
 jobs:
   print_hello:
     docker:
@@ -19,6 +20,15 @@ jobs:
          name: "echo OWNER NAME ENV"
          command: |
               echo $OWNER
+  
+  save_hello_world_output:
+    steps:
+        - persist_to_workspace:
+            root: /tmp/dir
+        - run:
+            name: "Save my name to file"
+            command: echo "Hello Odai Atef" > out.txt
+        
 workflows:
   # Name the workflow "welcome"
   welcome:
