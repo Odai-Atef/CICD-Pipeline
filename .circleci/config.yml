@@ -14,6 +14,17 @@ commands:
     steps:
        - run: echo << parameters.to >>
 jobs:
+  failuer_job:
+    docker:
+        - image:  circleci/node:13.8.0
+    steps:
+        - run: return 1;
+        - run:
+            name: "On Error"
+            command: echo "Erro happend"
+            when: on_fail
+            
+
   print_using_params:
     docker:
         - image: circleci/node:13.8.0
@@ -62,6 +73,7 @@ workflows:
   welcome:
     # Run the welcome/run job in its own container
     jobs:
+      - failuer_job
       - print_using_params 
       - save_hello_world_output
       - print_output_file:
