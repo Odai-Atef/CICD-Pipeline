@@ -15,8 +15,9 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo world
-      - run: echo $OWNER
+      - run:
+         name: "echo OWNER NAME ENV"
+         command: echo $OWNER
 workflows:
   # Name the workflow "welcome"
   welcome:
