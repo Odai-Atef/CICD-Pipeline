@@ -22,6 +22,8 @@ jobs:
               echo $OWNER
   
   save_hello_world_output:
+    docker:
+      - image: circleci/node:13.8.0
     steps:
         - persist_to_workspace:
             root: /tmp/dir
