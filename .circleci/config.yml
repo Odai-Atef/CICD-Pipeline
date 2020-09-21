@@ -25,9 +25,11 @@ jobs:
     steps:
         - persist_to_workspace:
             root: /tmp/dir
+            paths:
+             - out.txt
         - run:
             name: "Save my name to file"
-            command: echo "Hello Odai Atef" > out.txt
+            command: echo "Hello Odai Atef" > /tmp/dir/out.txt
         
 workflows:
   # Name the workflow "welcome"
