@@ -39,7 +39,7 @@ jobs:
     steps:
         - run:
             name: "Read File"
-            command: echo cat ~/out.txt
+            command:  cat ~/out.txt
         - attach_workspace:
             at: ~/out.txt 
         
