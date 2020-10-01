@@ -39,7 +39,7 @@ jobs:
              command: cat ~/cloudformation.yml
          - run: 
              name: "create stack"
-             command: aws cloudformation validate-template --template-body file://~/cloudformation.yml #aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          
   failuer_job:
     docker:
