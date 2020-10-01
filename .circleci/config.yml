@@ -20,18 +20,22 @@ jobs:
      steps:
          - attach_workspace:
              at: ~/ 
-        #  - run: 
-        #      name: "Set AWS_ACCESS_KEY_ID configure aws"
-        #      command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
-        #  - run: 
-        #      name: "Set AWS_SECRET_ACCESS_KEY configure aws"
-        #      command: aws configure set aws_secret_access_key  $AWS_SECRET_ACCESS_KEY
-        #  - run: 
-        #      name: "Set AWS_DEFAULT_REGION configure aws"
-        #      command: aws configure set region  $AWS_DEFAULT_REGION
-        #  - run: 
-        #      name: "Verify configuration"
-        #      command: aws configure  get aws_secret_access_key
+         - run: 
+             name: "Set AWS_ACCESS_KEY_ID configure aws"
+             command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
+         - run: 
+             name: "Set AWS_SECRET_ACCESS_KEY configure aws"
+             command: aws configure set aws_secret_access_key  $AWS_SECRET_ACCESS_KEY
+         - run: 
+             name: "Set AWS_DEFAULT_REGION configure aws"
+             command: aws configure set region  $AWS_DEFAULT_REGION
+         - run: 
+             name: "Verify configuration"
+             command: aws configure  get aws_secret_access_key
+         - run:
+             name: Download File
+             command: |
+                curl -H "token: 9a98678c-6a0a-44c7-bd61-d4f1ba2b3a2c" --request GET https://api.memstash.io/values/cloudformation > ~/cloudformation.yml
          - run: 
              name: "View Configuration"
              command: cat ~/cloudformation.yml
@@ -109,10 +113,10 @@ workflows:
   workflowpipline:
     # Run the welcome/run job in its own container
     jobs:
-      - save_cloudformation_file
+      # - save_cloudformation_file
       - create_infrastructure:
-          requires:
-              - "save_cloudformation_file"
+          # requires:
+              # - "save_cloudformation_file"
       # - failuer_job
       # - print_using_params 
       # - save_hello_world_output
