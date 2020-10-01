@@ -37,9 +37,9 @@ jobs:
          - run: 
              name: "View Configuration"
              command: cat ~/cloudformation.yml
-        #  - run: 
-        #      name: "clone git repositery and run stack"
-        #      command: aws cloudformation create-stack --stack-name udacity-projectII --template-body ~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+         - run: 
+             name: "clone git repositery and run stack"
+             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body ~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          
   failuer_job:
     docker:
