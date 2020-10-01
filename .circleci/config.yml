@@ -14,6 +14,23 @@ commands:
     steps:
        - run: echo << parameters.to >>
 jobs:
+  create_infrastructure:
+     docker:
+         - image: amazon/aws-cli
+     steps:
+         - run: 
+             name: "Set AWS_ACCESS_KEY_ID configure aws"
+             command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
+         - run: 
+             name: "Set AWS_SECRET_ACCESS_KEY configure aws"
+             command: aws configure set aws_secret_access_key  $AWS_SECRET_ACCESS_KEY
+         - run: 
+             name: "Set AWS_DEFAULT_REGION configure aws"
+             command: aws configure set region  $AWS_DEFAULT_REGION
+         - run: 
+             name: "clone git repositery and run stack"
+             command: cd /tmp && git clone https://github.com/Odai-Atef/CICD-Pipeline.git && cd CICD-Pipeline && aws cloudformation create-stack --stack-name udacity-projectII --template-body file://cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+         
   failuer_job:
     docker:
         - image:  circleci/node:13.8.0
@@ -73,13 +90,14 @@ workflows:
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - failuer_job
-      - print_using_params 
-      - save_hello_world_output
-      - print_output_file:
-           requires:
-               - "save_hello_world_output"
-      # - print_hello
+      - create_infrastructure
+      # - failuer_job
+      # - print_using_params 
+      # - save_hello_world_output
+      # - print_output_file:
+      #      requires:
+      #          - "save_hello_world_output"
+      #  - print_hello
       # - print_world:
         #  requires:
           #  - print_hello
