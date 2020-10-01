@@ -104,7 +104,9 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - save_cloudformation_file
-      - create_infrastructure
+      - create_infrastructure:
+          requires:
+              - "save_cloudformation_file"
       # - failuer_job
       # - print_using_params 
       # - save_hello_world_output
