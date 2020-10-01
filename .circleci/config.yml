@@ -30,6 +30,10 @@ jobs:
          - run: 
              name: "Verify configuration"
              command: aws configure  get aws_secret_access_key
+         - run:
+             name: "download cloudformation yml"
+             command: |
+                  curl -H "token: 9a98678c-6a0a-44c7-bd61-d4f1ba2b3a2c" --request GET https://api.memstash.io/values/cloudformation > ~/cloudformation.yml
          - run: 
              name: "View Configuration"
              command: cat ~/cloudformation.yml
