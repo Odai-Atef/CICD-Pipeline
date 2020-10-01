@@ -65,7 +65,7 @@ jobs:
               echo $OWNER
   save_cloudformation_file:
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
     steps:
         - run:
             name: "download cloudformation yml"
