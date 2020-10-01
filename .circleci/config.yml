@@ -30,6 +30,12 @@ jobs:
              name: "Set AWS_DEFAULT_REGION configure aws"
              command: aws configure set region  $AWS_DEFAULT_REGION
          - run: 
+             name: "Verify configuration"
+             command: aws configure  get aws_secret_access_key
+         - run: 
+             name: "View Configuration"
+             command: cat ~/cloudformation.yml
+         - run: 
              name: "clone git repositery and run stack"
              command: aws cloudformation create-stack --stack-name udacity-projectII --template-body ~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          
