@@ -16,28 +16,28 @@ commands:
 jobs:
   create_infrastructure:
      docker:
-         - image: amazon/aws-cli
+         - image: circleci/node:13.8.0
      steps:
          - attach_workspace:
              at: ~/ 
-         - run: 
-             name: "Set AWS_ACCESS_KEY_ID configure aws"
-             command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
-         - run: 
-             name: "Set AWS_SECRET_ACCESS_KEY configure aws"
-             command: aws configure set aws_secret_access_key  $AWS_SECRET_ACCESS_KEY
-         - run: 
-             name: "Set AWS_DEFAULT_REGION configure aws"
-             command: aws configure set region  $AWS_DEFAULT_REGION
-         - run: 
-             name: "Verify configuration"
-             command: aws configure  get aws_secret_access_key
-         - run: 
+        #  - run: 
+        #      name: "Set AWS_ACCESS_KEY_ID configure aws"
+        #      command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
+        #  - run: 
+        #      name: "Set AWS_SECRET_ACCESS_KEY configure aws"
+        #      command: aws configure set aws_secret_access_key  $AWS_SECRET_ACCESS_KEY
+        #  - run: 
+        #      name: "Set AWS_DEFAULT_REGION configure aws"
+        #      command: aws configure set region  $AWS_DEFAULT_REGION
+        #  - run: 
+        #      name: "Verify configuration"
+        #      command: aws configure  get aws_secret_access_key
+        #  - run: 
              name: "View Configuration"
              command: cat ~/cloudformation.yml
-         - run: 
-             name: "clone git repositery and run stack"
-             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body ~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+        #  - run: 
+        #      name: "clone git repositery and run stack"
+        #      command: aws cloudformation create-stack --stack-name udacity-projectII --template-body ~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          
   failuer_job:
     docker:
@@ -71,7 +71,7 @@ jobs:
               echo $OWNER
   save_cloudformation_file:
     docker:
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
         - run:
             name: "download cloudformation yml"
