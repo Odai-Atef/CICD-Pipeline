@@ -18,8 +18,8 @@ jobs:
      docker:
          - image: amazon/aws-cli
      steps:
-         - attach_workspace:
-             at: ~/ 
+        #  - attach_workspace:
+        #      at: ~/ 
          - run: 
              name: "Set AWS_ACCESS_KEY_ID configure aws"
              command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
