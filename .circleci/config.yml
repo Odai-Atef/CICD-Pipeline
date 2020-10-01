@@ -32,7 +32,7 @@ jobs:
         #  - run: 
         #      name: "Verify configuration"
         #      command: aws configure  get aws_secret_access_key
-        #  - run: 
+          - run: 
              name: "View Configuration"
              command: cat ~/cloudformation.yml
         #  - run: 
