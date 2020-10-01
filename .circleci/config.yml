@@ -18,6 +18,8 @@ jobs:
      docker:
          - image: amazon/aws-cli
      steps:
+         - attach_workspace:
+             at: ~/ 
          - run: 
              name: "Set AWS_ACCESS_KEY_ID configure aws"
              command: aws configure set aws_access_key_id  $AWS_ACCESS_KEY_ID
@@ -29,7 +31,7 @@ jobs:
              command: aws configure set region  $AWS_DEFAULT_REGION
          - run: 
              name: "clone git repositery and run stack"
-             command: aws cloudformation create-stack --stack-name udacity-projectII --template-url s3://udacityproject1cicd/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body ~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          
   failuer_job:
     docker:
@@ -61,7 +63,17 @@ jobs:
          name: "echo OWNER NAME ENV"
          command: |
               echo $OWNER
-  
+  save_cloudformation_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+        - run:
+            name: "download cloudformation yml"
+            command: curl -H "token: 9a98678c-6a0a-44c7-bd61-d4f1ba2b3a2c" --request GET https://api.memstash.io/values/cloudformation > ~/cloudformation.yml
+        - persist_to_workspace:
+            root: ~/
+            paths:
+             - cloudformation.yml     
   save_hello_world_output:
     docker:
       - image: circleci/node:13.8.0
