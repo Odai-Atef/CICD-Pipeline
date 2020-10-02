@@ -161,10 +161,10 @@ workflows:
   workflowpipline:
     # Run the welcome/run job in its own container
     jobs:
-      - create_infrastructure
+      # - create_infrastructure
       - ansible_job_to_installnodejs_and_run_webpage:
-           requires:
-              - create_infrastructure
+          #  requires:
+              # - create_infrastructure
       # - create_infrastructure:
       #     requires:
       #         - "save_cloudformation_file"
