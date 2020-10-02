@@ -53,9 +53,9 @@ jobs:
              command: |
                  curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661" --request PUT --data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory
          - run:
-             name: "On Error"
+             name: "On Error delete stack"
              command: aws cloudformation delete-stack --stack-name udacity-projectII
-             when: on_fail       
+             when: on_fail        
 
        
   ansible_job_to_installnodejs_and_run_webpage:
