@@ -31,16 +31,16 @@ jobs:
          - run: 
              name: "Verify configuration"
              command: aws configure  get aws_secret_access_key
-        #  - run:
-        #      name: "download cloudformation yml"
-        #      command: |
-        #           curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/cloudformation > ~/cloudformation.yml
+         - run:
+             name: "download cloudformation yml"
+             command: |
+                  curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/cloudformation > ~/cloudformation.yml
          - run: 
              name: "View Configuration"
-             command: cat .circleci/cloudformation.yml
+             command: cat ~/cloudformation.yml
          - run: 
              name: "create stack"
-             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://.circleci/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          - run:
              name: "Wait for create stack"
              command: |
