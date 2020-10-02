@@ -38,7 +38,7 @@ jobs:
 
          - run: 
              name: "View Configuration"
-             command: cat ~/cloudformation.yml
+             command: cat ~/project/.circleci/cloudformation.yml
          - run: 
              name: "create stack"
              command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/project/.circleci/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
