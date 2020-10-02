@@ -84,7 +84,11 @@ jobs:
         #     name: Download inverntory
         #     command: |
         #         curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/inventory > ~/inventory.txt
-               
+
+        - run: 
+            name: disbale ssh checking
+            command: |
+                export ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook 'playbook.yml'  --extra-vars="some vars..." --tags="tags_name..." -vv
         - run: 
             name: Configure server
             command: |
