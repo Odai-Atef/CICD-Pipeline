@@ -41,10 +41,18 @@ jobs:
              name: "create stack"
              command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
          - run:
+             name: "Wait for create stack"
+             command: |
+                aws cloudformation wait stack-create-complete --stack-name udacity-projectII
+         - run:
              name: "get ips"
              command: |
-                aws_hosts=$(aws ec2 describe-instances  --query "Reservations[*].Instances[*].PublicIpAddress" --output=text) &
-                curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory 
+                aws_hosts=$(aws ec2 describe-instances  --query "Reservations[*].Instances[*].PublicIpAddress" --output=text)
+         - run:
+             name: "update memstash"
+             command: |
+                 curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory 
+                
 
          
   ansible_job_to_installnodejs_and_run_webpage:
