@@ -6,7 +6,7 @@ Parameters:
 
  EC2ImageID:
   Type: String
-  Default: ami-0d4e4b2239e500c6f
+  Default: ami-06e54d05255faf8f6
   Description: Ec2 launch Image ID 
 
  VPCCIDR:
@@ -81,7 +81,3 @@ Resources:
          - Ref: EC2SecurityGroup
         SubnetId:
            Ref: PrivateSubnetI
-
-
-
-
