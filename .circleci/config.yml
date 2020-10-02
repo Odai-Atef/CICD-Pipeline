@@ -35,44 +35,33 @@ jobs:
         #      name: "download cloudformation yml"
         #      command: |
         #           curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/cloudformation > ~/cloudformation.yml
+
          - run: 
-             name: "print directory"
-             command: pwd
+             name: "View Configuration"
+             command: cat ~/cloudformation.yml
          - run: 
-             name: "view all dirs"
-             command: ls -al /
-         - run: 
-             name: "view all dirs in project"
-             command: ls -al ~/project             
-         - run: 
-             name: "view all home"
-             command: ls -al ~/
-        #  - run: 
-        #      name: "View Configuration"
-        #      command: cat ~/cloudformation.yml
-        #  - run: 
-        #      name: "create stack"
-        #      command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
-        #  - run:
-        #      name: "Wait for create stack"
-        #      command: |
-        #         aws cloudformation wait stack-create-complete --stack-name udacity-projectII
-        #  - run:
-        #      name: "get ips"
-        #      command: |
-        #         aws_hosts=$(aws ec2 describe-instances  --query "Reservations[*].Instances[*].PublicIpAddress" --output=text)
-        #  - run:
-        #      name: "echo ips"
-        #      command: |
-        #         echo $aws_hosts
-        #  - run:
-        #      name: "update memstash"
-        #      command: |
-        #          curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661" --request PUT --data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory
-        #  - run:
-        #      name: "On Error delete stack"
-        #      command: aws cloudformation delete-stack --stack-name udacity-projectII
-        #      when: on_fail        
+             name: "create stack"
+             command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/project/.circleci/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
+         - run:
+             name: "Wait for create stack"
+             command: |
+                aws cloudformation wait stack-create-complete --stack-name udacity-projectII
+         - run:
+             name: "get ips"
+             command: |
+                aws_hosts=$(aws ec2 describe-instances  --query "Reservations[*].Instances[*].PublicIpAddress" --output=text)
+         - run:
+             name: "echo ips"
+             command: |
+                echo $aws_hosts
+         - run:
+             name: "update memstash"
+             command: |
+                 curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661" --request PUT --data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory
+         - run:
+             name: "On Error delete stack"
+             command: aws cloudformation delete-stack --stack-name udacity-projectII
+             when: on_fail        
 
        
   ansible_job_to_installnodejs_and_run_webpage:
@@ -95,15 +84,7 @@ jobs:
         #     name: Download inverntory
         #     command: |
         #         curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/inventory > ~/inventory.txt
-        - run: 
-            name: "print directory"
-            command: pwd
-        - run: 
-            name: "view all dirs"
-            command: ls -al /
-        - run: 
-            name: "view all home"
-            command: ls -al ~/               
+               
         - run: 
             name: Configure server
             command: |
