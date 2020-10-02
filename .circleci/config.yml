@@ -49,6 +49,10 @@ jobs:
              command: |
                 aws_hosts=$(aws ec2 describe-instances  --query "Reservations[*].Instances[*].PublicIpAddress" --output=text)
          - run:
+             name: "echo ips"
+             command: |
+                echo $aws_hosts
+         - run:
              name: "update memstash"
              command: |
                  curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661" --request PUT --data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory
@@ -69,19 +73,19 @@ jobs:
             name: Install dependencies
             command: |
                 apk add --update ansible
-        - run:
-            name: Download playbook
-            command: |
-               curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/playbook > ~/playbook.yml
-        - run: 
-            name: Download inverntory
-            command: |
-               curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/inventory > ~/inventory.txt
-             
+        # - run:
+        #     name: Download playbook
+        #     command: |
+        #        curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/playbook > ~/playbook.yml
+        # - run: 
+        #     name: Download inverntory
+        #     command: |
+        #        curl -H "token: 0cd52177-868d-4982-ac51-f1e6b661064a" --request GET https://api.memstash.io/values/inventory > ~/inventory.txt
+               
         - run: 
             name: Configure server
             command: |
-                ansible-playbook -i ~/inventory.txt ~/playbook.yml
+                ansible-playbook -i inventory.txt playbook.yml
 
  
   failuer_job:
