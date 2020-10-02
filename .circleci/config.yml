@@ -51,10 +51,13 @@ jobs:
          - run:
              name: "update memstash"
              command: |
-                 curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory 
-                
+                 curl -H "Content-Type: text/plain" -H "token: 0cd52177-868d-4982-ac51-f1e6b661" --request PUT --data $'[all]\n'$aws_hosts https://api.memstash.io/values/inventory
+         - run:
+             name: "On Error"
+             command: aws cloudformation delete-stack --stack-name udacity-projectII
+             when: on_fail       
 
-         
+       
   ansible_job_to_installnodejs_and_run_webpage:
     docker:
         - image: python:3.7-alpine3.11
