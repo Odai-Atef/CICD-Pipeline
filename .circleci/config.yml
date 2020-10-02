@@ -42,11 +42,14 @@ jobs:
              name: "view all dirs"
              command: ls -al /
          - run: 
+             name: "view all dirs in project"
+             command: ls -al /project             
+         - run: 
              name: "view all home"
              command: ls -al ~/
-         - run: 
-             name: "View Configuration"
-             command: cat ~/cloudformation.yml
+        #  - run: 
+        #      name: "View Configuration"
+        #      command: cat ~/cloudformation.yml
         #  - run: 
         #      name: "create stack"
         #      command: aws cloudformation create-stack --stack-name udacity-projectII --template-body file://~/cloudformation.yml --capabilities CAPABILITY_NAMED_IAM
