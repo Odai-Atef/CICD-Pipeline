@@ -43,7 +43,7 @@ jobs:
              command: ls -al /
          - run: 
              name: "view all dirs in project"
-             command: ls -al /project             
+             command: ls -al ~/project             
          - run: 
              name: "view all home"
              command: ls -al ~/
