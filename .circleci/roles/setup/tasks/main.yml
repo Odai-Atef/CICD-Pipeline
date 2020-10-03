@@ -22,7 +22,6 @@
   shell: |
     npm install forever -g
 
-
 - name: "Run webserver"
   shell: |
     forever start /tmp/index.js &
