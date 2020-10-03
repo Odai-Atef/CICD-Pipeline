@@ -92,7 +92,7 @@ jobs:
         - run: 
             name: Configure server
             command: |
-                ansible-playbook -i .circleci/inventory.txt .circleci/playbook.yml --ssh-common-args='-o StrictHostKeyChecking=no'
+                ansible-playbook -i .circleci/inventory.txt .circleci/playbook.yml ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
  
   failuer_job:
