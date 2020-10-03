@@ -20,7 +20,7 @@
 
 - name: "Install forever"
   shell: |
-    npm install forever -g
+    sudo npm install forever -g
 
 - name: "Run webserver"
   shell: |
