@@ -20,4 +20,4 @@
 
 - name: "Run webserver"
   shell: |
-    node /tmp/index.js
+    node /tmp/index.js &
