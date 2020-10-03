@@ -185,7 +185,7 @@ workflows:
         - ansible_job_to_installnodejs_and_run_webpage
         - smoke_test:
              requires:
-                - ansible_job_to_installnodejs_and_run_webpage
+                - "ansible_job_to_installnodejs_and_run_webpage"
       # - create_infrastructure
       # - ansible_job_to_installnodejs_and_run_webpage:
           #  requires:
